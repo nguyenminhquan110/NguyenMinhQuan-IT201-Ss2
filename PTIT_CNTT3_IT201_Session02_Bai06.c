@@ -1,13 +1,20 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main() {
     int n, vitri, giatri;
-    int a[101];
+    int *a;
 
     do {
         printf("Nhap so luong phan tu cua mang (0 < n <= 100): ");
         scanf("%d", &n);
     } while (n <= 0 || n > 100);
+
+    a = (int *)malloc((n + 1) * sizeof(int));
+    if (a == NULL) {
+        printf("Khong the cap phat bo nho!\n");
+        return 1;
+    }
 
     printf("Nhap cac phan tu cua mang:\n");
     for (int i = 0; i < n; i++) {
@@ -20,6 +27,7 @@ int main() {
 
     if (vitri < 0 || vitri > n) {
         printf("Khong hop le\n");
+        free(a);
         return 0;
     }
 
@@ -39,6 +47,8 @@ int main() {
             printf(", ");
     }
     printf("]\n");
+
+    free(a);
 
     return 0;
 }
